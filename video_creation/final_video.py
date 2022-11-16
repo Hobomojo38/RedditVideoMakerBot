@@ -11,6 +11,7 @@ from moviepy.video.compositing.CompositeVideoClip import CompositeVideoClip
 from moviepy.video.compositing.concatenate import concatenate_videoclips
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+from moviepy.video.io.ffmpeg_tools import ffmpeg_speed_up
 from rich.console import Console
 
 from utils.cleanup import cleanup
@@ -43,6 +44,23 @@ def name_normalize(name: str) -> str:
     else:
         return name
 
+# def speed_up(videoPath, speed):
+#     path = videoPath.split('/')[:-1]
+#     videoTitle = videoPath.split('/')[2]
+#     cmd = [
+#         get_setting("FFMPEG_BINARY"),
+#         "-i",
+#         videoPath,
+#         "-filter_complex",
+#         f"[0:v]setpts={1/speed}*PTS[v];[0:a]atempo={speed}[a]",
+#         "-map",
+#         "[v]",
+#         "-map",
+#         "[a]",
+#         f"{'/'.join(path)}/Sped Up/{videoTitle}"
+#     ]
+
+#     subprocess_call(cmd)
 
 def make_final_video(
     number_of_clips: int,
@@ -158,6 +176,10 @@ def make_final_video(
         targetname=f"results/{subreddit}/{filename}",
     )
     save_data(subreddit, filename, title, idx, background_config[2])
+
+    # Speeds up the video without altering voice pitch : Max Edit
+    ffmpeg_speed_up(f"results/{subreddit}/{filename}", 1.06)
+
     print_step("Removing temporary files 🗑")
     cleanups = cleanup(id)
     print_substep(f"Removed {cleanups} temporary files 🗑")
