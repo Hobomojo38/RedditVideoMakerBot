@@ -42,4 +42,8 @@ background_options = {
         "No Copyright Gameplay",
         lambda t: ("center", 480 + t),
     ),
+    "minecraft_sp1": ("https://www.youtube.com/watch?v=s9PeJyBujQc", "speedrun 1.mp4", "astralio", "center"),
+    "minecraft_sp2": ("https://www.youtube.com/watch?v=SFVyWf7fMm8", "speedrun 2.mp4", "astralio", "center"),
+    "minecraft_sp3": ("https://www.youtube.com/watch?v=p2F0mNgqOHE", "speedrun 3.mp4", "astralio", "center"),
+    "minecraft_sp4": ("https://www.youtube.com/watch?v=0FozUrXj6LE", "speedrun 4.mp4", "astralio", "center")
 }
